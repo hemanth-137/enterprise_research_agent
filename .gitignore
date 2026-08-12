@@ -2,3 +2,6 @@
 /data
 /downloaded_data
 output.txt
+/.vscode
+/ingestion/unstructured/__pycache__/
+output.json
