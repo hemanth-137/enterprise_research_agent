@@ -5,3 +5,4 @@ output.txt
 /.vscode
 output.json
 __pycache__/
+.env
