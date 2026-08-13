@@ -1,5 +1,7 @@
-import tiktoken
-from docling_core.transforms.chunker.tokenizer.openai import OpenAITokenizer
+import os
+
+from docling_core.transforms.chunker.tokenizer.huggingface import HuggingFaceTokenizer
+from transformers import AutoTokenizer
 
 from docling_core.transforms.chunker.hybrid_chunker import HybridChunker
 
@@ -51,9 +53,11 @@ def process_doc_chunks(docling_doc):
                 table_serializer=MarkdownTableSerializer(),
             )
 
-    tokenizer = OpenAITokenizer(
-        tokenizer=tiktoken.get_encoding("cl100k_base"),
-        max_tokens=CHUNK_SIZE,
+    gemma_tokenizer = AutoTokenizer.from_pretrained("Xenova/gemma-tokenizer")
+
+    tokenizer = HuggingFaceTokenizer(
+        tokenizer=gemma_tokenizer,
+        max_tokens=CHUNK_SIZE
     )
 
     chunker = HybridChunker(
@@ -66,11 +70,13 @@ def process_doc_chunks(docling_doc):
     processed_chunks = []
 
     for i, chunk in enumerate(chunker.chunk(dl_doc=docling_doc)):
-        
+        metad = extract_metadata(chunk)
+        doc_name = os.path.splitext(metad.get("doc_name", "unknown"))[0]
+
         processed_chunks.append({
-            "id": f"chunk_{i:03d}",
+            "id": f"{doc_name}_c_{i:03d}",
             "text": extract_text(chunker, chunk),
-            "metadata": extract_metadata(chunk),
+            "metadata": metad,
         })
 
     return processed_chunks
@@ -80,15 +86,16 @@ if __name__ == "__main__":
 
     from doc_parser import doc_parser
 
-    file_path = "./data/pdfs/0002-pdf.pdf"
+    file_path = "./data/pdfs/resume.pdf"
 
     docling_doc = doc_parser(file_path)
 
     result = process_doc_chunks(docling_doc)
 
-    tokenizer = OpenAITokenizer(
-        tokenizer=tiktoken.get_encoding("cl100k_base"),
-        max_tokens=CHUNK_SIZE,
+    gemma_tokenizer = AutoTokenizer.from_pretrained("Xenova/gemma-tokenizer")
+    tokenizer = HuggingFaceTokenizer(
+        tokenizer=gemma_tokenizer,
+        max_tokens=CHUNK_SIZE
     )
 
     with open("test_chunk_02.txt", "w", encoding="utf-8") as file:
