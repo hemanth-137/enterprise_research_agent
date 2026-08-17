@@ -6,3 +6,6 @@ output.txt
 output.json
 __pycache__/
 .env
+qdrant_storage/
+local_embedd_snapshot.snapshot
+processed_chunks.json
