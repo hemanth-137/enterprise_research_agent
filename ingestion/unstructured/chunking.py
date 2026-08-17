@@ -43,7 +43,7 @@ def extract_metadata(chunk) -> dict:
     }
 
 
-def process_doc_chunks(docling_doc):
+def create_chunker():
 
     class MarkdownTableSerializerProvider(ChunkingSerializerProvider):
 
@@ -53,31 +53,43 @@ def process_doc_chunks(docling_doc):
                 table_serializer=MarkdownTableSerializer(),
             )
 
-    gemma_tokenizer = AutoTokenizer.from_pretrained("Xenova/gemma-tokenizer")
+    gemma_tokenizer = AutoTokenizer.from_pretrained(
+        "Xenova/gemma-tokenizer"
+    )
 
     tokenizer = HuggingFaceTokenizer(
         tokenizer=gemma_tokenizer,
-        max_tokens=CHUNK_SIZE
+        max_tokens=CHUNK_SIZE,
     )
 
-    chunker = HybridChunker(
+    return HybridChunker(
         tokenizer=tokenizer,
         merge_peers=True,
         repeat_table_header=True,
         serializer_provider=MarkdownTableSerializerProvider(),
     )
 
+
+# main func
+def process_doc_chunks(docling_docs):
+
+    chunker = create_chunker()
+
     processed_chunks = []
 
-    for i, chunk in enumerate(chunker.chunk(dl_doc=docling_doc)):
-        metad = extract_metadata(chunk)
-        doc_name = os.path.splitext(metad.get("doc_name", "unknown"))[0]
+    for docling_doc in docling_docs:
 
-        processed_chunks.append({
-            "id": f"{doc_name}_c_{i:03d}",
-            "text": extract_text(chunker, chunk),
-            "metadata": metad,
-        })
+        for i, chunk in enumerate(chunker.chunk(dl_doc=docling_doc)):
+
+            metad = extract_metadata(chunk)
+
+            doc_name = os.path.splitext(metad.get("doc_name", "unknown"))[0]
+
+            processed_chunks.append({
+                "id": f"{doc_name}_c_{i:03d}",
+                "text": extract_text(chunker, chunk),
+                "metadata": metad,
+            })
 
     return processed_chunks
 

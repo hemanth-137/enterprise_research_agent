@@ -1,50 +1,44 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
-import google.generativeai as genai
-import os
-from dotenv import load_dotenv
-import numpy as np
-
-load_dotenv()
+import uuid
 
 
-client = QdrantClient(url="http://localhost:6333")
+url = "http://localhost:6333"
 
-gemini_api = os.getenv("GEMINI_API_KEY")
-
-genai.configure(api_key=gemini_api)
-
-query = """
-When does the call for evidence for Approved Document B conclude?"""
+def add_embedd_to_db(processed_chunks,db_name,client_url = url):
 
 
+    client = QdrantClient(url=client_url)
 
-result = genai.embed_content(
-        model="models/gemini-embedding-001",
-        content=query,
-        task_type="question_answering",
-        output_dimensionality=768
+    if not client.collection_exists(db_name):
+        client.create_collection(
+            collection_name=db_name,
+            vectors_config=VectorParams(size=768, distance=Distance.DOT),
         )
 
-embedding_vector = np.array(result['embedding'])
-norm = np.linalg.norm(embedding_vector)
-normalized_embeddings = (embedding_vector / norm).tolist()
+    points = []
 
-search_result = client.query_points(
-    collection_name="embedd_test_collection",
-    query=normalized_embeddings,
-    with_payload=True,
-    limit=2
-).points
+    for chunk in processed_chunks:
+        qdrant_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, chunk["id"]))
 
-for i in search_result:
+        payload = {
+            "id": chunk["id"],   # Keeps your original readable ID
+            "text": chunk["text"],         # Chunk content
+            "metadata": chunk["metadata"]  # Custom metadata dict
+        }
 
-    
-    print(f"Qdrant ID (UUID): {i.id}")
-    print(f"Match Score: {i.score:.4f}")
-    print("=" * 30)
-    
-    # 2. Use bracket notation to read keys inside your payload dictionary
-    print(f"Original Chunk ID: {i.payload['id']}")
-    print(f"Text Content:\n{i.payload['text']}")
-    print("\n" + "#" * 50 + "\n")
+        points.append(
+            PointStruct(
+                id=qdrant_id,
+                vector=chunk["embedding"],
+                payload=payload
+            )
+        )
+
+    operation_info = client.upsert(
+        collection_name="embedd_test_collection",
+        points=points,
+        wait=True
+    )
+
+    return operation_info

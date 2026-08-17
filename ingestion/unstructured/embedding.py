@@ -4,95 +4,67 @@ from doc_parser import doc_parser
 from dotenv import load_dotenv
 import os
 import numpy as np
-import uuid
+import time
 
 load_dotenv()
 
+    # file_path = "./data/pdfs/0070-pdf.pdf"
 
-file_path = "./data/pdfs/0070-pdf.pdf"
-doc_doc = doc_parser(file_path)
-processed_chunks = process_doc_chunks(doc_doc)
-print("1. done doc_doc and processed chunks\n")
+    # doc_doc = doc_parser(file_path)
+    # processed_chunks = process_doc_chunks(doc_doc)
+    # print("1. done doc_doc and processed chunks\n")
 
-md_text = doc_doc.export_to_markdown()
-with open("text_embedd1.txt","w",encoding="utf-8") as file:
-    file.write(md_text)
+    # md_text = doc_doc.export_to_markdown()
+    # with open("text_embedd1.txt","w",encoding="utf-8") as file:
+    #     file.write(md_text)
 
-print("done textembedd text 1\n")
-with open("text_embedd2.txt","w",encoding="utf-8") as file:
-    file.write(str(processed_chunks))
-print("done textembedd text 2\n")
-chunk_texts = [chunk["text"] for chunk in processed_chunks]
+    # print("done textembedd text 1\n")
+    # with open("text_embedd2.txt","w",encoding="utf-8") as file:
+    #     file.write(str(processed_chunks))
+    # print("done textembedd text 2\n")
 
+def create_embeddings(processed_chunks, batch_size=10):
 
+    gemini_api = os.getenv("GEMINI_API_KEY")
 
-gemini_api = os.getenv("GEMINI_API_KEY")
+    genai.configure(api_key=gemini_api)
 
-genai.configure(api_key=gemini_api)
+    for i in range(0, len(processed_chunks), batch_size):
 
-result = genai.embed_content(
-        model="models/gemini-embedding-001",
-        content=chunk_texts,
-        task_type="retrieval_document",
-        output_dimensionality=768
+        batch = processed_chunks[i:i + batch_size]
+
+        chunk_texts = [chunk["text"] for chunk in batch]
+
+        result = genai.embed_content(
+            model="models/gemini-embedding-001",
+            content=chunk_texts,
+            task_type="retrieval_document",
+            output_dimensionality=768
         )
 
-print("2. got embeddings\n")
-embeddings_matrix = np.array(result['embedding'])
-norms = np.linalg.norm(embeddings_matrix, axis=1, keepdims=True)
-normalized_embeddings = embeddings_matrix / norms
+        
 
-for i, chunk in enumerate(processed_chunks):
-    chunk["embedding"] = normalized_embeddings[i].tolist()
+        embeddings_matrix = np.array(result["embedding"])
 
-with open("text_embedd3.txt","w",encoding="utf-8") as file:
-    file.write(str(processed_chunks))
-
-print("3. got full embeddings\n")
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
-
-
-client = QdrantClient(url="http://localhost:6333")
-
-
-client.create_collection(
-    collection_name="embedd_test_collection",
-    vectors_config=VectorParams(size=768, distance=Distance.DOT),
-)
-
-points = []
-
-for chunk in processed_chunks:
-    qdrant_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, chunk["id"]))
-
-    payload = {
-        "id": chunk["id"],   # Keeps your original readable ID
-        "text": chunk["text"],         # Chunk content
-        "metadata": chunk["metadata"]  # Custom metadata dict
-    }
-
-    points.append(
-        PointStruct(
-            id=qdrant_id,
-            vector=chunk["embedding"],
-            payload=payload
+        norms = np.linalg.norm(
+            embeddings_matrix,
+            axis=1,
+            keepdims=True
         )
-    )
+
+        normalized_embeddings = embeddings_matrix / norms
+
+        for j, chunk in enumerate(batch):
+            chunk["embedding"] = normalized_embeddings[j].tolist()
+
+        time.sleep(10) #to limit API use as am on free tier
+
+        
+    return processed_chunks
 
 
-
-operation_info = client.upsert(
-    collection_name="embedd_test_collection",
-    points=points,
-    wait=True
-)
-print("4. added to db")
-
-
-
-
-
+if __name__ == "__main__":
+    pass
 
 
 

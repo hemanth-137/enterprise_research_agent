@@ -8,9 +8,10 @@ from docling.document_converter import (
 )
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
+from pathlib import Path
 
 
-def doc_parser(file_path:str):
+def doc_parser(folder_path:str):
 
     # this effects only for .pdf files
     pdf_options = PdfPipelineOptions(
@@ -31,11 +32,21 @@ def doc_parser(file_path:str):
         }
     )
 
-    result = converter.convert(file_path)
+    files = [
+        file for file in folder_path.iterdir()
+        if file.is_file()
+    ]
 
-    document = result.document
 
-    return document
+
+    results = converter.convert_all(files,raises_on_error=False)
+    documents = [
+        result.document
+        for result in results
+        if result.document is not None
+    ]
+
+    return documents
 
 if __name__ == "__main__":
 
