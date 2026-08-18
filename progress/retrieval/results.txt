@@ -1,0 +1,390 @@
+
+================ QDRANT ================
+Question    : What environmentally friendly suggestions are proposed for lubricating railway switch systems and curves to prevent groundwater contamination?
+Target ID   : 0031b70f-b611-5ae5-938a-342d68fddf8d
+Qdrant rank : 4
+Doc name    : 0056-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0031b70f-b611-5ae5-938a-342d68fddf8d
+Rerank rank  : 1
+Rerank score : 0.9448697566986084
+Doc name     : 0056-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Why did the Chair of the legal committee decide to alter the order of scheduled items and bring forward item 17?
+Target ID   : 009e587f-9dec-5d60-a63f-49d66efea86d
+Qdrant rank : 1
+Doc name    : 0084-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 009e587f-9dec-5d60-a63f-49d66efea86d
+Rerank rank  : 1
+Rerank score : 7.057149410247803
+Doc name     : 0084-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What percentage of supported non-user firms awarded the highest rating scores of 4 or 5 for the conduct and expertise of their external advice providers?
+Target ID   : 00db0c75-3628-5219-bb54-62666d93c1fe
+Qdrant rank : 3
+Doc name    : 0003-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 00db0c75-3628-5219-bb54-62666d93c1fe
+Rerank rank  : 7
+Rerank score : 4.258842468261719
+Doc name     : 0003-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What are the sequential steps required to modify the options shown on the PowerPoint Status bar?
+Target ID   : 010a37bd-69d5-5080-845a-6e571d31342c
+Qdrant rank : 4
+Doc name    : 0006-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 010a37bd-69d5-5080-845a-6e571d31342c
+Rerank rank  : 3
+Rerank score : -1.5631471872329712
+Doc name     : 0006-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : How can rounding to the nearest whole number cause apparent differences between visual data displays and textual explanations in reports?
+Target ID   : 02335a0e-4dd3-55a7-8c23-4d710f2efb29
+Qdrant rank : 1
+Doc name    : 0003-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 02335a0e-4dd3-55a7-8c23-4d710f2efb29
+Rerank rank  : 1
+Rerank score : 3.340343475341797
+Doc name     : 0003-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : How can an organization mitigate public opposition and controversy when introducing fees for a previously free public service?
+Target ID   : 03af54a2-b4f6-54ce-ac3d-aec78e6373b9
+Qdrant rank : 2
+Doc name    : 0054-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 03af54a2-b4f6-54ce-ac3d-aec78e6373b9
+Rerank rank  : 1
+Rerank score : -0.7250202894210815
+Doc name     : 0054-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Which legislation has been enacted to address atmospheric issues like ozone depletion and global warming in the context of train operator actions?
+Target ID   : 05b2fef3-d005-5446-9146-822c9920f6c2
+Qdrant rank : 1
+Doc name    : 0056-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 05b2fef3-d005-5446-9146-822c9920f6c2
+Rerank rank  : 1
+Rerank score : 4.382373332977295
+Doc name     : 0056-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : For which age bracket of businesses is the difference in outsourcing R&D between supported and unsupported firms statistically significant?
+Target ID   : 05e3bafc-dab5-525f-aa63-b96fe378c054
+Qdrant rank : 1
+Doc name    : 0001-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 05e3bafc-dab5-525f-aa63-b96fe378c054
+Rerank rank  : 1
+Rerank score : 6.046454429626465
+Doc name     : 0001-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : How does the Public Services (Social Value) Act 2012 define the procurement obligations of councils?
+Target ID   : 060c6851-d858-5c07-b3a8-1ca5487816f7
+Qdrant rank : 1
+Doc name    : 0054-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 060c6851-d858-5c07-b3a8-1ca5487816f7
+Rerank rank  : 1
+Rerank score : 9.153291702270508
+Doc name     : 0054-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What service is provided to all member companies at the North East Technology Park to offer them global virtual support?
+Target ID   : 062eb868-aabd-5553-b248-ea4f94d221b8
+Qdrant rank : 1
+Doc name    : 0054-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 062eb868-aabd-5553-b248-ea4f94d221b8
+Rerank rank  : 1
+Rerank score : 5.319181442260742
+Doc name     : 0054-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Over the prior two years, what was the most common category of assistance sought by unsupported businesses looking to expand abroad?
+Target ID   : 06a2c87c-e2fa-551f-9345-ae860b0eb2f3
+Qdrant rank : 7
+Doc name    : 0001-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 06a2c87c-e2fa-551f-9345-ae860b0eb2f3
+Rerank rank  : 3
+Rerank score : 1.0796982049942017
+Doc name     : 0001-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Which system integration project represents the most complex change for shippers since the Exit Reform?
+Target ID   : 07f56594-5849-5965-b086-2ffdbecc333f
+Qdrant rank : 1
+Doc name    : 0042-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 07f56594-5849-5965-b086-2ffdbecc333f
+Rerank rank  : 1
+Rerank score : 4.133951663970947
+Doc name     : 0042-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What is the nationwide average Band D Council tax rate per residence?
+Target ID   : 08b4c7ce-6eda-5f7e-9895-bfc843bd646b
+Qdrant rank : 1
+Doc name    : 0085-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 08b4c7ce-6eda-5f7e-9895-bfc843bd646b
+Rerank rank  : 1
+Rerank score : 8.209844589233398
+Doc name     : 0085-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : In what month and year was the South Africa Design Workshop held at the University of the Western Cape?
+Target ID   : 08d46c85-5465-518a-a3fa-307fa36266e3
+Qdrant rank : 1
+Doc name    : 0008-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 08d46c85-5465-518a-a3fa-307fa36266e3
+Rerank rank  : 1
+Rerank score : 8.089822769165039
+Doc name     : 0008-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What are some of the key topics ENTSOG is tasked with developing a position paper on?
+Target ID   : 0a27eb28-70da-5cbe-bf4a-f2b18eafc864
+Qdrant rank : 1
+Doc name    : 0043-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0a27eb28-70da-5cbe-bf4a-f2b18eafc864
+Rerank rank  : 1
+Rerank score : 6.130828380584717
+Doc name     : 0043-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What key questions regarding workforce capability and stakeholder skills should be asked when assessing culture within an organization?
+Target ID   : 0a48758b-672d-5ac3-8f96-32e399ec57ef
+Qdrant rank : 1
+Doc name    : 0054-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0a48758b-672d-5ac3-8f96-32e399ec57ef
+Rerank rank  : 2
+Rerank score : 1.010467767715454
+Doc name     : 0054-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : How do expansion expectations into foreign markets differ over a three-year period between general businesses and UKTI clients?
+Target ID   : 0a4e3b6d-18da-5180-8f54-e539194d4f5b
+Qdrant rank : 2
+Doc name    : 0003-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0a4e3b6d-18da-5180-8f54-e539194d4f5b
+Rerank rank  : 3
+Rerank score : 1.6796256303787231
+Doc name     : 0003-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What primary issues were highlighted as key findings in the internal audit report regarding right to work checks and inventory?
+Target ID   : 0b4f02ee-aac0-5476-bbe7-a25fca6d8eef
+Qdrant rank : 1
+Doc name    : 0052-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0b4f02ee-aac0-5476-bbe7-a25fca6d8eef
+Rerank rank  : 1
+Rerank score : 2.757688045501709
+Doc name     : 0052-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Why did the Director of Planning declare he was not involved in processing the Ashford planning application despite knowing the applicant?
+Target ID   : 0d4ed097-b9ad-50be-8f60-ca7ec245cb04
+Qdrant rank : 1
+Doc name    : 0084-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0d4ed097-b9ad-50be-8f60-ca7ec245cb04
+Rerank rank  : 1
+Rerank score : 6.1662468910217285
+Doc name     : 0084-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What is the mailing address and contact phone number for Noise Festival Ltd.?
+Target ID   : 0d56c4f4-779f-554c-9bc6-1e9e36a29bea
+Qdrant rank : 1
+Doc name    : 0038-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0d56c4f4-779f-554c-9bc6-1e9e36a29bea
+Rerank rank  : 1
+Rerank score : 8.410006523132324
+Doc name     : 0038-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What critical areas of policy analysis will the chronic poverty framework focus on to understand why certain hostile policies are pursued?
+Target ID   : 0d86fd64-d4d1-5091-89c3-686ae4c00134
+Qdrant rank : 1
+Doc name    : 0008-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0d86fd64-d4d1-5091-89c3-686ae4c00134
+Rerank rank  : 1
+Rerank score : 9.178573608398438
+Doc name     : 0008-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Why will the construction of the proposed slurry store avoid generating long-term local highway traffic?
+Target ID   : 0dd461b5-5afe-598e-992f-678ea0c1afa8
+Qdrant rank : 1
+Doc name    : 0100-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0dd461b5-5afe-598e-992f-678ea0c1afa8
+Rerank rank  : 1
+Rerank score : 6.982919216156006
+Doc name     : 0100-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What is the specified within-day zero firm price per unit of energy in the gas scheduling systems?
+Target ID   : 0f6e0185-3e3f-599c-a608-2df10d8affbf
+Qdrant rank : 12
+Doc name    : 0042-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0f6e0185-3e3f-599c-a608-2df10d8affbf
+Rerank rank  : 1
+Rerank score : 1.2939549684524536
+Doc name     : 0042-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : According to the Railways Act 1993, how long does a licence holder have to submit their environmental policy to the Regulator after the licence is active?
+Target ID   : 0f9d9ead-7976-5b44-b844-f40b0f36a5af
+Qdrant rank : 1
+Doc name    : 0056-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 0f9d9ead-7976-5b44-b844-f40b0f36a5af
+Rerank rank  : 1
+Rerank score : 7.635226726531982
+Doc name     : 0056-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What entity is legally responsible for performing the annual landlord gas safety checks on the council's 7,000 properties?
+Target ID   : 100d3a4f-3948-5142-88de-e43bba1dd1cf
+Qdrant rank : 1
+Doc name    : 0076-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 100d3a4f-3948-5142-88de-e43bba1dd1cf
+Rerank rank  : 1
+Rerank score : 7.02771520614624
+Doc name     : 0076-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : How has the Grenfell tragedy impacted the prevention and protection workload of English and Welsh fire and rescue services?
+Target ID   : 12ec038b-f498-5d33-b737-09243bcd0f1f
+Qdrant rank : 1
+Doc name    : 0070-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 12ec038b-f498-5d33-b737-09243bcd0f1f
+Rerank rank  : 1
+Rerank score : 6.25526237487793
+Doc name     : 0070-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What risk arises when two collaborative authorities fail to coordinate their approach to risk management?
+Target ID   : 165dc78e-b30d-52e2-b53d-f00477d5a1e1
+Qdrant rank : 3
+Doc name    : 0048-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 165dc78e-b30d-52e2-b53d-f00477d5a1e1
+Rerank rank  : 1
+Rerank score : 3.8694841861724854
+Doc name     : 0048-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : Under Measure A06, what three criteria can classify a firm as experiencing significant business benefits?
+Target ID   : 19a855cd-0678-5a49-8340-f1fbabb1d84a
+Qdrant rank : 1
+Doc name    : 0003-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 19a855cd-0678-5a49-8340-f1fbabb1d84a
+Rerank rank  : 1
+Rerank score : 6.578827857971191
+Doc name     : 0003-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : What is the primary purpose of conducting an initial environmental review for a railway operator?
+Target ID   : 238f3f09-9f33-576a-9310-0807946eb42c
+Qdrant rank : 1
+Doc name    : 0056-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 238f3f09-9f33-576a-9310-0807946eb42c
+Rerank rank  : 1
+Rerank score : 2.171725034713745
+Doc name     : 0056-pdf.pdf
+******************************
+
+================ QDRANT ================
+Question    : After what duration do unidentified receipt funds become statute-barred, meaning they cannot be claimed by their originator?
+Target ID   : 39260cb7-9a04-5e3a-ba00-47ac98624ec7
+Qdrant rank : 1
+Doc name    : 0015-pdf.pdf
+
+================ RERANKER ================
+Target ID    : 39260cb7-9a04-5e3a-ba00-47ac98624ec7
+Rerank rank  : 1
+Rerank score : 6.722999572753906
+Doc name     : 0015-pdf.pdf
+******************************
