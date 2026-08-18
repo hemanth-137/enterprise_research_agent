@@ -9,3 +9,6 @@ __pycache__/
 qdrant_storage/
 local_embedd_snapshot.snapshot
 processed_chunks.json
+retrieval/eval_set.py
+retrieval/get_chunks_eval.py
+qdrant_chunks.txt
