@@ -12,3 +12,5 @@ processed_chunks.json
 retrieval/eval_set.py
 retrieval/get_chunks_eval.py
 qdrant_chunks.txt
+output_res.json
+output_res.txt
