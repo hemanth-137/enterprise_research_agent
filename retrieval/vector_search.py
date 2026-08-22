@@ -1,3 +1,6 @@
+import os
+os.environ["HF_HUB_OFFLINE"] = "1"
+
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from qdrant_client import QdrantClient
@@ -5,7 +8,7 @@ from qdrant_client import QdrantClient
 
 model = SentenceTransformer(
     "BAAI/bge-base-en-v1.5",
-    device="cuda"
+    device="cpu"
 )
 
 
@@ -31,7 +34,7 @@ def get_chunks(embedding):
     results = client.query_points(
         collection_name="embedd_test_collection",
         query=embedding,
-        limit=30
+        limit=100
     )
 
     ret_txt = []
@@ -52,9 +55,16 @@ def get_chunks(embedding):
 
 if __name__ == "__main__":
 
-    query = """What planning application and development are 
-    being discussed, what change did the commenter make from their
-      previous position, and what local reason did they give for supporting approval?"""
+    query = """What time-series forecasting
+      project did the candidate build and what methods were used?"""
 
     embedding = create_query_embeddings(query)
-    get_chunks(embedding)
+    results = get_chunks(embedding)
+    for meta,txt in results:
+        print(meta)
+        #print("\n\n")
+        print()
+        print(txt)
+        print()
+        print("="*50)
+        print("\n\n")
