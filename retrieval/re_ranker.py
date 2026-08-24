@@ -6,20 +6,15 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 from .vector_search import create_query_embeddings, get_chunks
 
+model_name = "BAAI/bge-reranker-base"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+model = model.to("cuda")
+model.eval()
+
 def get_context(query):
-
-    model_name = "BAAI/bge-reranker-base"
-
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-    model = model.to("cuda")
-    model.eval()
-
-
-    # query = """What planning application and development are being discussed, 
-    # what change did the commenter make from their 
-    # previous position, and what local reason did they give for supporting approval?"""
 
     query_embedd = create_query_embeddings(query)
     result_txt = get_chunks(query_embedd)
@@ -45,7 +40,7 @@ def get_context(query):
 
     results = []
 
-    for score,(meta,txt) in ranked[:3]:
+    for score,(meta,txt) in ranked[:5]:
         #print(f"Score: {score}\n")
         # print(f"doc_name : {meta.get('doc_name')}\n")
         # print(f"pg_no : {meta.get('page_no')}\n")
@@ -63,7 +58,9 @@ def get_context(query):
     return context
 
 if __name__ == "__main__":
-    pass
+
+    query = """What is the council's Financial Management System used for, what areas did the 2015/16 audit focus on, and what issue did the auditors identify with the control accounts?"""
+    print(get_context(query))
 
 
 

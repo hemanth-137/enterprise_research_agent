@@ -99,8 +99,7 @@ if __name__ == "__main__":
     from doc_parser import doc_parser
 
     file_path = "./data/pdfs/resume.pdf"
-
-    docling_doc = doc_parser(file_path)
+    docling_doc = doc_parser(file_path,single_file=True)
 
     result = process_doc_chunks(docling_doc)
 

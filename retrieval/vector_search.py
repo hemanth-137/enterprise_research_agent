@@ -13,7 +13,7 @@ model = SentenceTransformer(
 
 
 url = "http://localhost:6333"
-
+client = QdrantClient(url=url)
 
 
 def create_query_embeddings(query):
@@ -29,12 +29,10 @@ def create_query_embeddings(query):
 
 def get_chunks(embedding):
 
-    client = QdrantClient(url=url)
-
     results = client.query_points(
         collection_name="embedd_test_collection",
         query=embedding,
-        limit=100
+        limit=30
     )
 
     ret_txt = []
@@ -55,8 +53,7 @@ def get_chunks(embedding):
 
 if __name__ == "__main__":
 
-    query = """What time-series forecasting
-      project did the candidate build and what methods were used?"""
+    query = """What is the council's Financial Management System used for, what areas did the 2015/16 audit focus on, and what issue did the auditors identify with the control accounts?"""
 
     embedding = create_query_embeddings(query)
     results = get_chunks(embedding)

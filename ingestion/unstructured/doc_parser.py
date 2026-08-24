@@ -11,7 +11,7 @@ from docling.datamodel.pipeline_options import PdfPipelineOptions
 from pathlib import Path
 
 
-def doc_parser(folder_path:str):
+def doc_parser(folder_path, single_file = False):
 
     # this effects only for .pdf files
     pdf_options = PdfPipelineOptions(
@@ -32,35 +32,38 @@ def doc_parser(folder_path:str):
         }
     )
 
-    files = [
+    if not single_file:
+        files = [
         file for file in folder_path.iterdir()
-        if file.is_file()
-    ]
+        if file.is_file()]
 
-
-
-    results = converter.convert_all(files,raises_on_error=False)
-    documents = [
-        result.document
-        for result in results
-        if result.document is not None
-    ]
+        results = converter.convert_all(files,raises_on_error=False)
+        documents = [
+            result.document
+            for result in results
+            if result.document is not None
+        ]
+    else:
+        results = converter.convert(folder_path,raises_on_error=False)
+        documents = results.document
 
     return documents
 
 if __name__ == "__main__":
 
-    file_path = "./data/pdfs/0097-pdf.pdf"
+    file_path = "./data/pdfs/resume.pdf"
 
-    doc = doc_parser(file_path)
-    markdown_output = doc.export_to_markdown()
-    json_output = doc.export_to_dict()
+    doc = doc_parser(file_path,single_file=True)
+    # #markdown_output = doc.export_to_markdown()
+    # json_output = doc.export_to_dict()
 
-    with open("output.txt", "w", encoding="utf-8") as file:
-        file.write(markdown_output)
+    # # with open("output_res.txt", "w", encoding="utf-8") as file:
+    # #     file.write(markdown_output)
 
-    with open("output.json", "w", encoding="utf-8") as file:
-        json.dump(json_output, file, indent=2, ensure_ascii=False)
+    # with open("output_res.json", "w", encoding="utf-8") as file:
+    #     json.dump(json_output, file, indent=2, ensure_ascii=False)
 
-    print("\nConversion finished.")
-    print("Markdown saved to output.txt")
+    # print("\nConversion finished.")
+    # print("Markdown saved to output.txt")
+
+    print(doc.export_to_text())
