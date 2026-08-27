@@ -14,3 +14,8 @@ retrieval/get_chunks_eval.py
 qdrant_chunks.txt
 output_res.json
 output_res.txt
+test_gen.py
+generation/initial_llm_test.py
+ingestion/test
+open_ragbench__collection-6814384280898642-2026-08-27-17-33-47.snapshot
+app.py
