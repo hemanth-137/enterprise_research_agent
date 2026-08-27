@@ -8,19 +8,19 @@ from qdrant_client import QdrantClient
 
 model = SentenceTransformer(
     "BAAI/bge-base-en-v1.5",
-    device="cpu"
+    device="cuda"
 )
 
 
 url = "http://localhost:6333"
 client = QdrantClient(url=url)
-
+collection_name = "open_ragbench__collection"
 
 def create_query_embeddings(query):
 
-
+    instruction = "Represent this sentence for searching relevant passages: "
     embedding = model.encode(
-        query,
+        instruction+query,
         normalize_embeddings=True
     ).tolist()
 
@@ -30,7 +30,7 @@ def create_query_embeddings(query):
 def get_chunks(embedding):
 
     results = client.query_points(
-        collection_name="embedd_test_collection",
+        collection_name=collection_name,
         query=embedding,
         limit=30
     )
@@ -39,6 +39,8 @@ def get_chunks(embedding):
     
     for result in results.points:
 
+        id = result.id
+        chunk_id = result.payload['id']
         meta = result.payload['metadata']
         txt = result.payload['text']
 
@@ -47,7 +49,7 @@ def get_chunks(embedding):
         # print(f"pg_no : {meta.get('page_no')}\n")
         # print(txt)
         # print("="*60)
-        ret_txt.append([meta,txt])
+        ret_txt.append([id,chunk_id,meta,txt])
 
     return ret_txt
 
@@ -57,11 +59,10 @@ if __name__ == "__main__":
 
     embedding = create_query_embeddings(query)
     results = get_chunks(embedding)
-    for meta,txt in results:
-        print(meta)
-        #print("\n\n")
-        print()
-        print(txt)
-        print()
+    for id,chunk_id,meta,txt in results[:3]:
+        print(id,end="\n\n")
+        print(chunk_id,end="\n\n")
+        print(meta,end="\n\n")
+        print(txt,end="\n\n")
         print("="*50)
         print("\n\n")

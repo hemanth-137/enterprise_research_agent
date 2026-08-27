@@ -19,7 +19,7 @@ def get_context(query):
     query_embedd = create_query_embeddings(query)
     result_txt = get_chunks(query_embedd)
 
-    pairs = [[query,txt] for _,txt in result_txt]
+    pairs = [[query,txt] for _,_,_,txt in result_txt]
 
     with torch.no_grad():
         inputs = tokenizer(
@@ -40,27 +40,39 @@ def get_context(query):
 
     results = []
 
-    for score,(meta,txt) in ranked[:5]:
+    for score,(id,chunk_id,meta,txt) in ranked[:5]:
         #print(f"Score: {score}\n")
         # print(f"doc_name : {meta.get('doc_name')}\n")
         # print(f"pg_no : {meta.get('page_no')}\n")
         # print(txt)
         # print("\n")
         # print("="*60)
-        results.append([txt,meta])
+        results.append([id,chunk_id,meta,txt])
 
     context = ""
 
-    for i,(txt,meta) in enumerate(results,start=1):
-        temp = f"Source {i}:\nContext: {txt}\nMetadata: {meta}\n\n---\n\n"
-        context += temp
+    # for i,(txt,meta) in enumerate(results,start=1):
+    #     temp = f"Source {i}:\nContext: {txt}\nMetadata: {meta}\n\n---\n\n"
+    #     context += temp
 
-    return context
+    # return context
+
+    return results
 
 if __name__ == "__main__":
 
     query = """What is the council's Financial Management System used for, what areas did the 2015/16 audit focus on, and what issue did the auditors identify with the control accounts?"""
-    print(get_context(query))
+    results = get_context(query)
+
+    for id,chunk_id,meta,txt in results:
+        
+        print(id,end="\n\n")
+        print(chunk_id,end="\n\n")
+        print(meta,end="\n\n")
+        print(txt,end="\n\n")
+        print("="*50)
+        print("\n\n")
+
 
 
 
