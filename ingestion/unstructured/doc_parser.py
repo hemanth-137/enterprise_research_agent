@@ -1,27 +1,29 @@
 import os
-os.environ["TORCHDYNAMO_DISABLE"] = "1"  #use this if you face c++ compiler errors
+os.environ["TORCHDYNAMO_DISABLE"] = "1"  # to avoid any cpp compiling errors
+#import json
+from pathlib import Path
 
-import json
 from docling.document_converter import (
     DocumentConverter,
     PdfFormatOption,
 )
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
-from pathlib import Path
+from tqdm import tqdm
 
 
 def doc_parser(folder_path, single_file = False):
 
-    # this effects only for .pdf files
+    target_path = Path(folder_path)
+
     pdf_options = PdfPipelineOptions(
-        do_ocr=False,   # Most of my pdfs are digital, so i turned off ocr to reduce memory usage 
+        do_ocr=False,   # as am running it local and have moslty digital pdfs
         force_backend_text=True,
         do_table_structure=True,
 
-        layout_batch_size=1,    # These 3 are for my persoanl case to save memory
+        layout_batch_size=1,
         queue_max_size=1,
-        images_scale=0.5,
+        images_scale=0.5, # to avoid ram issues
     )
 
     converter = DocumentConverter(
@@ -33,21 +35,27 @@ def doc_parser(folder_path, single_file = False):
     )
 
     if not single_file:
+
         files = [
-        file for file in folder_path.iterdir()
-        if file.is_file()]
-
-        results = converter.convert_all(files,raises_on_error=False)
-        documents = [
-            result.document
-            for result in results
-            if result.document is not None
+            file for file in target_path.iterdir()
+            if file.is_file() and file.suffix.lower() == ".pdf"
         ]
-    else:
-        results = converter.convert(folder_path,raises_on_error=False)
-        documents = results.document
 
-    return documents
+        if not files:
+            print("No PDF files found in the given folder.")
+            return
+        
+        results_generator = converter.convert_all(files, raises_on_error=False)
+
+        for result in tqdm(results_generator,total=len(files), desc="Parsing PDFs", unit="doc"):
+            if result.document is not None:
+                yield result.document
+            else:
+                print(f"unable to covert {result.input.file}")
+    else:
+        result = converter.convert(target_path, raises_on_error=False)
+        if result.document is not None:
+            yield result.document
 
 if __name__ == "__main__":
 
@@ -66,4 +74,4 @@ if __name__ == "__main__":
     # print("\nConversion finished.")
     # print("Markdown saved to output.txt")
 
-    print(doc.export_to_text())
+    #print(doc.export_to_text())

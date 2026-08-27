@@ -1,26 +1,40 @@
 from sentence_transformers import SentenceTransformer
-import numpy as np
-
 
 model = SentenceTransformer(
     "BAAI/bge-base-en-v1.5",
     device="cuda"
 )
 
+def create_embeddings(chunks_generator, batch_size=32):
+    batch = []
+    
+    for chunk in chunks_generator:
+        batch.append(chunk)
+        
+        if len(batch) == batch_size:
+            texts = [item["text"] for item in batch]
+            
+            embeddings = model.encode(
+                texts,
+                batch_size=batch_size,
+                normalize_embeddings=True,
+                show_progress_bar=False
+            )
+            
+            for item, embedding in zip(batch, embeddings):
+                item["embedding"] = embedding.tolist()
+                yield item
+                
+            batch = []
 
-
-def create_embeddings(processed_chunks, batch_size=32):
-
-    texts = [chunk["text"] for chunk in processed_chunks]
-
-    embeddings = model.encode(
-        texts,
-        batch_size=batch_size,
-        normalize_embeddings=True,
-        show_progress_bar=True
-    )
-
-    for chunk, embedding in zip(processed_chunks, embeddings):
-        chunk["embedding"] = embedding.tolist()
-
-    return processed_chunks
+    if batch:
+        texts = [item["text"] for item in batch]
+        embeddings = model.encode(
+            texts,
+            batch_size=len(texts),
+            normalize_embeddings=True,
+            show_progress_bar=False
+        )
+        for item, embedding in zip(batch, embeddings):
+            item["embedding"] = embedding.tolist()
+            yield item
