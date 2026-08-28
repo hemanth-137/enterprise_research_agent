@@ -2,7 +2,6 @@ import os
 os.environ["HF_HUB_OFFLINE"] = "1"
 
 from sentence_transformers import SentenceTransformer
-import numpy as np
 from qdrant_client import QdrantClient
 
 
@@ -14,7 +13,7 @@ model = SentenceTransformer(
 
 url = "http://localhost:6333"
 client = QdrantClient(url=url)
-collection_name = "open_ragbench__collection"
+collection_name = "embedd_test_collection"
 
 def create_query_embeddings(query):
 
@@ -27,17 +26,19 @@ def create_query_embeddings(query):
     return embedding
 
 
-def get_chunks(embedding):
+def get_chunks(query,db_name:str = collection_name,limit: int = 30):
+
+    embedding = create_query_embeddings(query)
 
     results = client.query_points(
-        collection_name=collection_name,
+        collection_name=db_name,
         query=embedding,
-        limit=30
-    )
+        limit=limit
+    ).points
 
     ret_txt = []
     
-    for result in results.points:
+    for result in results:
 
         id = result.id
         chunk_id = result.payload['id']
